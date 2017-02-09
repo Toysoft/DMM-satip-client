@@ -497,14 +497,10 @@ void satipVtuner::vtunerEvent()
 
 		case MSG_READ_STATUS:
 			//INFO(MSG_MAIN,"MSG_READ_STATUS\n");
-//				if (m_satip_rtp)
-//				{
-//					if (m_satip_rtp->getHasLock())
-//						msg.body.status = FE_HAS_LOCK;
-//					else
-//						msg.body.status = 0;
-//				}
-			msg.body.status = FE_HAS_LOCK;
+			if (m_satip_rtp && m_satip_rtp->getHasLock())
+				msg.body.status = FE_HAS_LOCK;
+			else
+				msg.body.status = 0;
 			break;
 		case MSG_READ_BER:
 			//INFO(MSG_MAIN,"MSG_READ_BER\n");
@@ -557,6 +553,16 @@ void satipVtuner::vtunerEvent()
 
 		case MSG_GET_PROPERTY:
 			DEBUG(MSG_MAIN,"MSG_GET_PROPERTY\n");
+			break;
+
+		case MSG_GET_TUNE_SETTINGS:
+			DEBUG(MSG_MAIN,"MSG_GET_TUNE_SETTINGS\n");
+			if (m_satip_rtp) {
+				m_satip_rtp->unset();
+			}
+			msg.body.tune_settings.min_delay_ms = 50; // let linux-tv api ask every 50ms for locked/unlocked state...
+			msg.body.tune_settings.step_size = 0;
+			msg.body.tune_settings.max_drift = 0;
 			break;
 
 		default:

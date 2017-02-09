@@ -45,6 +45,7 @@
 #define MSG_TYPE_CHANGED			15
 #define MSG_SET_PROPERTY			16
 #define MSG_GET_PROPERTY			17
+#define MSG_GET_TUNE_SETTINGS		18
 
 #define MSG_NULL				1024
 #define MSG_DISCOVER			1025
@@ -54,12 +55,20 @@ typedef unsigned int   u32;
 typedef unsigned short u16;
 typedef unsigned char  u8;
 
+struct dvb_frontend_tune_settings
+{
+	int min_delay_ms;
+	int step_size;
+	int max_drift;
+};
+
 #if VMSG_TYPE1
 struct vtuner_message {
 	__u32 type;
 	union 
 	{
-        struct dvb_frontend_parameters fe_params;
+		struct dvb_frontend_parameters fe_params;
+		struct dvb_frontend_tune_settings tune_settings;
 
 #if DVB_API_VERSION >= 5
 		struct dtv_property prop;
@@ -117,6 +126,7 @@ struct vtuner_message
                 } vsb;
             } u;
         } fe_params;
+		struct dvb_frontend_tune_settings tune_settings;
         struct dtv_property prop;
         u32 status;
         __u32 ber;

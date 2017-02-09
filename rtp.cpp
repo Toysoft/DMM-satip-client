@@ -43,7 +43,7 @@ satipRTP::satipRTP(int vtuner_fd)
 						m_rtcp_socket(-1),
 						m_thread(0),
 						m_running(false),
-						m_hasLock(true),
+						m_hasLock(false),
 						m_signalStrength(0),
 						m_signalQuality(0),
 						m_openok(false)
@@ -65,6 +65,13 @@ satipRTP::~satipRTP()
 
 	if (m_rtp_socket)
 		close(m_rtp_socket);
+}
+
+void satipRTP::unset()
+{
+	m_signalStrength = 0;
+	m_hasLock = false;
+	m_signalQuality = 0;
 }
 
 int satipRTP::openRTP()
@@ -154,9 +161,7 @@ void satipRTP::parseRtcpAppPayload(char *buffer)
 		quality (Signal quality) : Numerical value between 0 and 15
 	*/
 
-	m_signalStrength = 0;
-	m_hasLock = false;
-	m_signalQuality = 0;
+	unset();
 
 	char *strp = strstr(buffer, ";tuner=");
 	if (strp)

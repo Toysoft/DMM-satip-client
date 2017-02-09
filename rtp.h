@@ -48,6 +48,7 @@ class satipRTP
 public:
 	satipRTP(int vtuner_fd);
 	virtual ~satipRTP();
+	void unset();
 	int get_rtp_port() { return m_rtp_port; }
 	int get_rtp_socket() { return m_rtp_socket; }
 	int get_rtcp_port() { return m_rtcp_port; }
