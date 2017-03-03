@@ -514,13 +514,13 @@ void satipVtuner::vtunerEvent()
 		case MSG_READ_SIGNAL_STRENGTH:
 			//INFO(MSG_MAIN,"MSG_READ_SIGNAL_STRENGTH %d -> %d\n", msg.body.ss, rtcp_data.signalStrength);
 			if (m_satip_rtp)
-				msg.body.ss = (u16)m_satip_rtp->getSignalStrenth();
+				msg.body.ss = (u16)m_satip_rtp->getSignalStrength();
 			break;
 
 		case MSG_READ_SNR:
 			//INFO(MSG_MAIN,"MSG_READ_SNR %d -> %d\n", msg.body.snr, m_satip_cfg->satip_get_signal_quality());
 			if (m_satip_rtp)
-				msg.body.snr = (u16)m_satip_rtp->getSignalSNR();
+				msg.body.snr = (u16)m_satip_rtp->getSignalStrength() * (u16)m_satip_rtp->getSignalQuality() / 65535;
 			break;
 
 		case MSG_READ_UCBLOCKS:

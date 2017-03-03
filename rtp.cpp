@@ -165,7 +165,7 @@ void satipRTP::parseRtcpAppPayload(char *buffer)
 		strp = strstr(strp, ",");
 		sscanf(strp, ",%d,%d,%d,%*s", &level, &lock, &quality);
 
-		m_signalStrength = (level >= 0) ? (level * 65535 / 255) : 0x12345678;
+		m_signalStrength = (level >= 0) ? (level * 65535 / 255) : 0;
 		m_hasLock = !!lock;
 		m_signalQuality = (m_hasLock && (quality >= 0)) ? (quality * 65535 / 15) : 0;
 

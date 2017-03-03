@@ -60,8 +60,8 @@ public:
 	void stop();
 
 	int getHasLock() { return m_hasLock; }
-	int getSignalStrenth() { return m_signalStrength; }
-	int getSignalSNR() { return m_signalQuality; }
+	int getSignalStrength() { return m_signalStrength; }
+	int getSignalQuality() { return m_signalQuality; }
 };
 
 #endif
