@@ -169,6 +169,10 @@ class satipVtuner
 {
 	int m_fd;
 	bool m_openok;
+
+	int tune_tries;
+	timespec timeout;
+
 #if VMSG_TYPE1
 	fe_sec_tone_mode_t m_tone;
 #else
