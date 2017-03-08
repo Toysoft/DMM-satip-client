@@ -605,7 +605,7 @@ void satipVtuner::vtunerEvent()
 			}
 			tune_tries = 0;
 			clock_gettime(CLOCK_MONOTONIC, &timeout);
-			timeout += 1500;
+			timeout += 3000;
 			msg.body.tune_settings.min_delay_ms = 50; // let linux-tv api ask every 50ms for locked/unlocked state...
 			msg.body.tune_settings.step_size = 0;
 			msg.body.tune_settings.max_drift = 0;
