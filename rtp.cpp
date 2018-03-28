@@ -109,7 +109,7 @@ int satipRTP::openRTP()
 			continue;
 		}
 
-		int len = 1024 * 1024;
+		int len = 4 * 1024 * 1024;
 		if (setsockopt(rtp_sock, SOL_SOCKET, SO_RCVBUFFORCE, &len, sizeof(len)))
 			WARN(MSG_MAIN, "unable to set UDP buffer (force) size to %d\n", len);
 
